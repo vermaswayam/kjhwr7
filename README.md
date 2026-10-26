@@ -30,6 +30,9 @@ The scope is purchase decisions made in **January 2026**, which means delivery d
   - nMAE: MAE as a % of average output.
   - P10/P50/P90 of the error: **P90 is the buffer that covers the shortfall in 9 out of 10 hours.**
   - Worst shortfall and worst surplus.
+- **Written for non-technical users.** The page uses everyday labels ("Typical miss", "Safety
+  buffer"). It also has auto-generated "Key takeaways" in plain English, and a "How to read this
+  page" section with a glossary.
 - **Views.**
   - KPI cards.
   - Forecast vs actual chart, for the whole month or a single delivery day. The single-day view
@@ -58,7 +61,7 @@ backend/                 Python API (FastAPI)
   requirements*.txt      Runtime / dev dependencies
 frontend/                React app (Vite + Recharts)
   src/App.jsx            Page layout, controls (cut-off, delivery day), data loading
-  src/components/        KPI cards and the three charts
+  src/components/        Takeaways, KPI cards, "how to read" guide and the three charts
   src/api.js, format.js  API client and number/date formatting
 api/index.py             Vercel serverless entry point (reuses backend/app)
 vercel.json              Vercel build and routing config

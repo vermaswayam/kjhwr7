@@ -23,8 +23,8 @@ export default function GenerationChart({ points, singleDay }) {
           contentStyle={{ background: 'var(--card)', border: '1px solid var(--grid)' }}
         />
         <Legend />
-        <Line dataKey="actual" name="Actual" stroke="var(--actual)" dot={false} strokeWidth={2} isAnimationActive={false} />
-        <Line dataKey="forecast" name="Forecast (at decision time)" stroke="var(--forecast)" dot={false} strokeWidth={2} isAnimationActive={false} />
+        <Line dataKey="actual" name="Actual wind" stroke="var(--actual)" dot={false} strokeWidth={2} isAnimationActive={false} />
+        <Line dataKey="forecast" name="Forecast (when ordering)" stroke="var(--forecast)" dot={false} strokeWidth={2} isAnimationActive={false} />
       </LineChart>
     </ResponsiveContainer>
   )
