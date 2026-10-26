@@ -110,12 +110,20 @@ def decision_view(actuals: list[dict], store: ForecastStore, start: date, end: d
         by_hour.append({"hour": h, "mae": m.get("mae"), "bias": m.get("bias"),
                         "p90": m.get("p90")})
 
+    by_day = []
+    for r in runs:
+        dp = [p for p in points if p["deliveryDate"] == r["deliveryDate"]]
+        m = error_metrics([p["forecast"] for p in dp], [p["actual"] for p in dp])
+        by_day.append({"deliveryDate": r["deliveryDate"], "mae": m.get("mae"),
+                       "bias": m.get("bias"), "maxShortfall": m.get("maxShortfall")})
+
     return {
         "cutoff": cutoff.strftime("%H:%M"),
         "metrics": error_metrics([p["forecast"] for p in points], [p["actual"] for p in points]),
         "points": points,
         "runs": runs,
         "byHour": by_hour,
+        "byDay": by_day,
     }
 
 

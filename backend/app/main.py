@@ -35,7 +35,7 @@ def meta():
     return {
         "deliveryStart": elexon.DELIVERY_START.isoformat(),
         "deliveryEnd": elexon.DELIVERY_END.isoformat(),
-        "defaultCutoff": "11:00",  # GB day-ahead auction gate closure (UK time, D-1)
+        "defaultCutoff": "11:00",  # default order deadline on D-1 (UK time); adjustable in the UI
         "source": "Elexon BMRS: FUELHH (fuelType=WIND) and WINDFOR",
     }
 

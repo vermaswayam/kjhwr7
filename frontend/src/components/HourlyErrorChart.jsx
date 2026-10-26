@@ -15,8 +15,8 @@ export default function HourlyErrorChart({ data }) {
         />
         <Legend />
         <ReferenceLine y={0} stroke="var(--muted)" />
-        <Bar dataKey="mae" name="Typical miss" fill="var(--forecast)" isAnimationActive={false} />
-        <Line dataKey="bias" name="Forecast too high (+) / too low (−)" stroke="var(--actual)" dot={false} strokeWidth={2} isAnimationActive={false} />
+        <Bar dataKey="mae" name="Typical miss (MAE)" fill="var(--forecast)" isAnimationActive={false} />
+        <Line dataKey="bias" name="Bias (forecast − actual)" stroke="var(--actual)" dot={false} strokeWidth={2} isAnimationActive={false} />
       </ComposedChart>
     </ResponsiveContainer>
   )

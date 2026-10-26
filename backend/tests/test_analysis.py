@@ -25,6 +25,7 @@ def test_uses_latest_run_before_cutoff():
                                   date(2026, 1, 2), date(2026, 1, 2), time(11, 0))
     assert view["runs"][0]["publishTime"] == "2026-01-01T09:30:00Z"
     assert [(p["forecast"], p["actual"]) for p in view["points"]] == [(150, 100), (100, 120)]
+    assert view["byDay"] == [{"deliveryDate": "2026-01-02", "mae": 35, "bias": 15, "maxShortfall": 50}]
 
 
 def test_earlier_cutoff_picks_earlier_run():

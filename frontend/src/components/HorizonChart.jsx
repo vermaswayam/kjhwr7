@@ -1,4 +1,4 @@
-import { Bar, CartesianGrid, ComposedChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, CartesianGrid, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { gw } from '../format'
 
 export default function HorizonChart({ data }) {
@@ -15,7 +15,8 @@ export default function HorizonChart({ data }) {
           contentStyle={{ background: 'var(--card)', border: '1px solid var(--grid)' }}
         />
         <Legend />
-        <Bar dataKey="mae" name="Typical miss" fill="var(--forecast)" isAnimationActive={false} />
+        <Bar dataKey="mae" name="Typical miss (MAE)" fill="var(--forecast)" isAnimationActive={false} />
+        <Line dataKey="rmse" name="RMSE (penalises big misses)" stroke="var(--actual)" dot={false} strokeWidth={2} isAnimationActive={false} />
       </ComposedChart>
     </ResponsiveContainer>
   )

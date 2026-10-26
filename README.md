@@ -16,9 +16,9 @@ The scope is purchase decisions made in **January 2026**, which means delivery d
 ## How it works
 
 - **Decision cut-off.** For each delivery day `D`, the app picks the **latest forecast published
-  before the cut-off on `D-1`**. The default cut-off is 11:00 UK time, when the GB day-ahead
-  auction closes. The cut-off can be changed in the UI. Forecasts published after it are never
-  used, so the analysis matches what the trader actually saw.
+  before the cut-off on `D-1`**. The default cut-off is 11:00 UK time. It can be changed in the
+  UI to match the desk's actual order deadline. Forecasts published after it are never used, so
+  the analysis matches what the trader actually saw.
 - **Matching.** Forecasts are hourly and actuals are half-hourly. They are compared on the hourly
   start times that both datasets share.
 - **Error** = forecast − actual. A positive error means wind came in below forecast, which is a
@@ -30,15 +30,18 @@ The scope is purchase decisions made in **January 2026**, which means delivery d
   - nMAE: MAE as a % of average output.
   - P10/P50/P90 of the error: **P90 is the buffer that covers the shortfall in 9 out of 10 hours.**
   - Worst shortfall and worst surplus.
-- **Written for non-technical users.** The page uses everyday labels ("Typical miss", "Safety
-  buffer"). It also has auto-generated "Key takeaways" in plain English, and a "How to read this
-  page" section with a glossary.
+- **For both business and technical users.** Every metric has a plain-English name with the
+  standard term beside it (for example "Typical miss · MAE"). Analysts also get a technical-metrics
+  row. "Key takeaways" summarise the results in plain English, and a glossary explains each term.
 - **Views.**
-  - KPI cards.
-  - Forecast vs actual chart, for the whole month or a single delivery day. The single-day view
-    also shows which forecast run was used.
+  - KPI cards and a technical-metrics row.
+  - Forecast vs actual chart. The gap between them is shaded, and a "plan with" line shows the
+    forecast minus the P90 buffer.
+  - Day-by-day accuracy: click a day to drill into it. The single-day view shows which forecast
+    run was used, with previous/next-day buttons.
   - Error by hour of day.
   - Error by forecast lead time, using every January forecast.
+  - CSV export of the comparison, and shareable links (the cut-off and day are kept in the URL).
 
 ### Key findings (11:00 cut-off)
 
