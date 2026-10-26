@@ -11,7 +11,7 @@ Data: GB national wind from Elexon BMRS only. Actual generation comes from
 [WINDFOR](https://bmrs.elexon.co.uk/api-documentation/endpoint/datasets/WINDFOR/stream).
 The scope is purchase decisions made in **January 2026**, which means delivery days **2 Jan – 1 Feb 2026**.
 
-**Live app:** _<add Vercel URL here>_
+**Live app:** https://kjhwr7.vercel.app
 
 ## How it works
 
