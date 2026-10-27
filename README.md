@@ -74,6 +74,52 @@ docker-compose.yml       Starts the app with one command
 .github/workflows/ci.yml CI: tests, frontend build, Docker build
 ```
 
+## Architecture
+
+```
+Elexon BMRS ──(app/elexon.py, run once)──▶ backend/data/*.json   cached, committed
+                                                  │
+                                                  ▼
+                       app/analysis.py   ForecastStore: forecast runs indexed by publish time
+                                         decision_view: latest run before the cut-off on D-1
+                                         horizon_view:  every run, grouped by lead time
+                                                  │
+                                                  ▼
+                       app/main.py       FastAPI: /api/decision, /api/horizon, /api/meta
+                                                  │  JSON over relative /api URLs
+                                                  ▼
+                       frontend/         React + Recharts dashboard
+```
+
+- **Picking the forecast is a lookup, not a scan.** `ForecastStore` sorts forecast runs by
+  `publishTime`, so "the latest run published before the cut-off" is a binary search
+  (`bisect`). Changing the cut-off in the UI re-runs the whole month quickly.
+- **Time zones.** Cut-offs and delivery days are in UK local time (`Europe/London`), so they
+  stay correct across daylight-saving changes. All timestamps in the API are UTC.
+- **The backend does the analysis; the frontend only displays it.** Every metric is
+  computed in Python and covered by tests. The React app formats and charts the results.
+
+## Development practices
+
+- **Tests** (`backend/tests`, pytest): they check that the latest forecast before the cut-off
+  is used, that an earlier cut-off picks an earlier forecast, the error metrics and
+  percentiles, the lead-time buckets, and the API end to end using the cached data.
+- **CI** (GitHub Actions): every push runs the tests, builds the frontend and builds the
+  Docker image.
+- **Reproducible data.** The January 2026 data is committed, so the tests, Docker and Vercel
+  all use exactly the same inputs.
+- **Small dependency footprint.** The backend needs only FastAPI, uvicorn and tzdata (UK time
+  zone data), and the frontend needs only React and Recharts.
+
+## Limitations and next steps
+
+- One month of data. The P90 buffer is measured on the same month it describes. A rolling
+  window over several months would give a more reliable buffer.
+- National wind only, as the brief asked. Next steps could add solar, regional data, or a
+  scheduled job that keeps the cache up to date.
+- Forecasts are hourly, so the half-hourly actuals are compared only on the hours both
+  datasets share.
+
 ## API
 
 | Endpoint | Description |

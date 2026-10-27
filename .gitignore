@@ -5,5 +5,11 @@ __pycache__/
 .venv/
 .vercel/
 backend/static/
-*.pdf
 report.*.json
+
+# Personal files (assignment brief, video script, pitch deck): not part of the submission
+*.pdf
+*.pptx
+VIDEO_SCRIPT.md
+TECH_REVIEW.html
+DIAGRAMS.md
